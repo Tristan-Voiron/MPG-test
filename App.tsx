@@ -1,3 +1,4 @@
+import FlashMessage from "react-native-flash-message";
 import { Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import PlayerDetails from './src/Screens/PlayerDetails';
@@ -38,6 +39,7 @@ export default function App() {
           })}
         />
       </Stack.Navigator>
+      <FlashMessage position="bottom" />
     </NavigationContainer>
   );
 }

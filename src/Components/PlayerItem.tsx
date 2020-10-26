@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
+import {getPosition} from '../function/utils';
 
 interface Props {
   firstname: string,
@@ -15,38 +16,6 @@ interface Props {
 interface State {}
 
 export default class PlayerItem extends Component<Props, State> {
-
-  getPosition () {
-    let position: String = '';
-    switch(this.props.ultraPosition) {
-      case 10: {
-        position = 'Gardien';
-        break;
-      }
-      case 20: {
-        position = 'Défenseur';
-        break;
-      }
-      case 21: {
-        position = 'Latéral';
-        break;
-      }
-      case 31: {
-        position = 'Milieu défensif';
-        break;
-      }
-      case 32: {
-        position = 'Milieu offensif';
-        break;
-      }
-      case 40: {
-        position = 'Attaquant';
-        break;
-      }
-    }
-    return position;
-  }
-  
   render() {
     return (
       <TouchableOpacity 
@@ -61,7 +30,7 @@ export default class PlayerItem extends Component<Props, State> {
                 :
                 <Text style={styles.name}>{this.props.lastname}</Text>
               }
-              <Text>{this.props.club} - {this.getPosition()}</Text>
+              <Text>{this.props.club} - {getPosition(this.props.ultraPosition)}</Text>
             </View>
             <View style={styles.rowContainer}>
               <Text style={styles.rating}>{this.props.avgRate}</Text>
