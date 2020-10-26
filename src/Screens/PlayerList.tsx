@@ -83,17 +83,18 @@ export default class PlayerList extends Component<Props, State> {
     console.log(id);
   }
 
-  onSearch(text: string) {
+  onSearch(text: string, position: number) {
     const newData = this.state.data.filter((item) => {
-      var itemData: string;
+      var itemName: string;
       if (item.firstname) {
-        itemData = item.firstname.toUpperCase() + ' ' + item.lastname.toUpperCase();
+        itemName = item.firstname.toUpperCase() + ' ' + item.lastname.toUpperCase();
       }
       else {
-        itemData = item.lastname.toUpperCase();
+        itemName = item.lastname.toUpperCase();
       }
       const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
+
+      return (itemName.indexOf(textData) > -1 && (!position || position === item.ultraPosition));
     });
     this.setState({filteredData: newData});
   }
@@ -114,7 +115,7 @@ export default class PlayerList extends Component<Props, State> {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar style="auto" />
-        <SearchBar onChange={(text) => this.onSearch(text)}/>
+        <SearchBar onChange={(text, position) => this.onSearch(text, position)}/>
         <FlatList
           data={this.state.filteredData}
           renderItem={({ item }) => (
