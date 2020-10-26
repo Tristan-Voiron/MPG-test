@@ -13,7 +13,7 @@ export default class ErrorIndicator extends Component<Props, State> {
     return (
       <SafeAreaView
         style={styles.container}>
-         <TouchableOpacity style={styles.container} activeOpacity={0.6} onPress={this.props.onPress}>
+         <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
             <Text style={styles.text}>L'accès aux données a échoué, veuillez cliquer ici pour recommencer.</Text>
             <Ionicons name="ios-refresh" size={32} color="green" />
         </TouchableOpacity>

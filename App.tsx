@@ -1,5 +1,4 @@
-import { Image, StyleSheet } from 'react-native';
-
+import { Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import PlayerDetails from './src/Screens/PlayerDetails';
 import PlayerList from './src/Screens/PlayerList';

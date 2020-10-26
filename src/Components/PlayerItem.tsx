@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
+
 interface Props {
   firstname: string,
   lastname: string,
@@ -8,6 +10,7 @@ interface Props {
   club: string,
   id: string,
   avgRate: number,
+  onPress: (arg0: string) => void;
 }
 interface State {}
 
@@ -48,13 +51,22 @@ export default class PlayerItem extends Component<Props, State> {
     return (
       <TouchableOpacity 
         activeOpacity={0.6}
-        style={styles.container}>
-          <View style={styles.rowContainer}>
+        style={styles.container}
+        onPress={(id) => this.props.onPress(this.props.id)}>
+          <View style={[styles.rowContainer, styles.itemContainer]}>
             <View style={styles.columnContainer}>
-              <Text style={styles.name}>{this.props.firstname} {this.props.lastname}</Text>
+              {
+                this.props.firstname ? 
+                <Text style={styles.name}>{this.props.firstname} {this.props.lastname}</Text> 
+                :
+                <Text style={styles.name}>{this.props.lastname}</Text>
+              }
               <Text>{this.props.club} - {this.getPosition()}</Text>
             </View>
-            <Text style={styles.rating}>{this.props.avgRate}</Text>
+            <View style={styles.rowContainer}>
+              <Text style={styles.rating}>{this.props.avgRate}</Text>
+              <Ionicons style={styles.icon} name="ios-star-half" size={22} color="green" />
+            </View>
           </View>
       </TouchableOpacity>
     );
@@ -73,11 +85,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
   },
-  rowContainer: {
-    flexDirection: 'row',
+  itemContainer: {
     alignItems: 'center',
     justifyContent: 'space-between',
     marginHorizontal: 10,
+  },
+  rowContainer: {
+    flexDirection: 'row',
   },
   columnContainer: {
     flexDirection: 'column',
@@ -90,5 +104,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
+  icon: {
+    marginLeft: 5,
+  }
 });
 
