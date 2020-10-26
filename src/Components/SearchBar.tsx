@@ -42,11 +42,11 @@ export default class SearchBar extends Component<Props, State> {
         <View style = {styles.separator} />
         <Picker
           selectedValue={this.state.position}
-          style={{width: 140}}
+          style={styles.picker}
           onValueChange={(itemValue, itemIndex) =>
             (this.props.onChange(this.state.text, Number(itemValue)), this.setState({position: Number(itemValue)}))
           }>
-          <Picker.Item color="#999" label="Postes" value={0} />
+          <Picker.Item color="#999" label="Poste" value={0} />
           <Picker.Item color="#000" label="Gardien" value={10} />
           <Picker.Item label="Défenseur" value={20} />
           <Picker.Item label="Latéral" value={21} />
@@ -81,6 +81,13 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+  },
+  picker: {
+    width: 140, 
+    transform: [
+      { scaleX: 0.9 }, 
+      { scaleY: 0.9 },
+    ]
   },
   separator: {
       height: 40,

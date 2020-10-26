@@ -7,49 +7,20 @@ import PlayerItem from '../Components/PlayerItem';
 import SearchBar from '../Components/SearchBar';
 import { StatusBar } from 'expo-status-bar';
 
-interface Props{}
+interface Props {
+  navigation: any,
+}
 interface State { 
   loading: boolean,
   error: boolean,
-  data: Array< {
-    club: string,
-    id: string, 
-    firstname: string,
-    lastname: string,
-    position: number,
-    quotation: number,
-    stats: {
-      avgRate: number,
-      currentChampionship: number,
-      percentageStarter: number,
-      sumGoals: number,
-    },
-    teamId: number,
-    ultraPosition: number,
-  }>,
-  filteredData: Array< {
-    club: string,
-    id: string, 
-    firstname: string,
-    lastname: string,
-    position: number,
-    quotation: number,
-    stats: {
-      avgRate: number,
-      currentChampionship: number,
-      percentageStarter: number,
-      sumGoals: number,
-    },
-    teamId: number,
-    ultraPosition: number,
-  }>,
+  data: Array<any>,
+  filteredData: Array<any>,
 }
 
 export default class PlayerList extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.navigateToDetails = this.navigateToDetails.bind(this);
-    this.onSearch = this.onSearch.bind(this);
     this.state = {
       loading: true,
       error: false,
@@ -79,8 +50,12 @@ export default class PlayerList extends Component<Props, State> {
       });
   }
 
-  navigateToDetails(id: string) {
-    console.log(id);
+  navigateToDetails(id: string, firstname: string, lastname: string) {
+    let name: string = firstname + ' ' + lastname;
+    this.props.navigation.navigate('PlayerDetails', {
+      id: id,
+      name: name,
+    });
   }
 
   onSearch(text: string, position: number) {
@@ -126,7 +101,7 @@ export default class PlayerList extends Component<Props, State> {
               ultraPosition={item.ultraPosition}
               avgRate={item.stats.avgRate}
               club={item.club}
-              onPress={(id) => this.navigateToDetails(id)}
+              onPress={(id, firstname, lastname) => this.navigateToDetails(id, firstname, lastname)}
             />
           )}
           keyExtractor={item => item.id}

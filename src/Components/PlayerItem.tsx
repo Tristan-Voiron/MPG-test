@@ -10,7 +10,7 @@ interface Props {
   club: string,
   id: string,
   avgRate: number,
-  onPress: (arg0: string) => void;
+  onPress: (arg0: string, arg1: string, arg2: string) => void;
 }
 interface State {}
 
@@ -52,7 +52,7 @@ export default class PlayerItem extends Component<Props, State> {
       <TouchableOpacity 
         activeOpacity={0.6}
         style={styles.container}
-        onPress={(id) => this.props.onPress(this.props.id)}>
+        onPress={() => this.props.onPress(this.props.id, this.props.firstname, this.props.lastname)}>
           <View style={[styles.rowContainer, styles.itemContainer]}>
             <View style={styles.columnContainer}>
               {

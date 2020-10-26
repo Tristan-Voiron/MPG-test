@@ -29,10 +29,12 @@ export default function App() {
           name="PlayerDetails" 
           component={PlayerDetails} 
           options={({ route }) => ({ 
-            //title: route.params.firstname, 
+            title: route.params.name, 
             headerTitleStyle: {
               fontWeight: 'bold',
+              textAlign: 'center',
             },
+            headerTitleAlign: 'center',
           })}
         />
       </Stack.Navigator>
